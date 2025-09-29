@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas - Data Entry Specialist</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #00aaff;
+            --primary-glow: rgba(0, 170, 255, 0.5);
+            --background-color: #121222;
+            --card-bg-color: rgba(255, 255, 255, 0.07);
+            --card-border-color: rgba(255, 255, 255, 0.2);
+            --text-color: #e0e0e0;
+            --heading-color: #ffffff;
+            --font-family: 'Poppins', sans-serif;
+            --secondary-glow-start: rgba(138, 43, 226, 0.5);
+            --secondary-glow-end: rgba(0, 255, 135, 0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 170, 255, 0.3), transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(138, 43, 226, 0.3), transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(0, 255, 135, 0.2), transparent 35%);
+            animation: aurora 20s linear infinite alternate;
+        }
+
+        @keyframes aurora {
+            0% { transform: rotate(0deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1.5); }
+        }
+
+        body.modal-open { overflow: hidden; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; position: relative; z-index: 2; }
+        h1, h2, h3 { color: var(--heading-color); margin-bottom: 1rem; }
+        h1 { font-size: 3.5rem; font-weight: 700; text-shadow: 0 0 15px var(--primary-glow); min-height: 1.2em; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 4rem; position: relative; }
+        
+        h2::after {
+            content: ''; position: absolute; bottom: -15px; left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 100px; height: 4px;
+            background: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-glow);
+            border-radius: 2px;
+            transition: transform 0.5s ease-out;
+        }
+        h2.visible::after { transform: translateX(-50%) scaleX(1); }
+
+        section { padding: 80px 0; }
+
+        .header {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 0 20px;
+        }
+        
+        #main-title {
+            display: inline-block;
+            border-right: .1em solid var(--primary-color);
+            white-space: nowrap;
+            overflow: hidden;
+            vertical-align: bottom;
+            animation: blink-caret .75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color); }
+        }
+
+        .profile-orb-container {
+            width: 180px;
+            height: 180px;
+            position: relative;
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-orb-wrapper {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            box-shadow: 0 0 25px var(--primary-glow);
+            transition: box-shadow 0.4s ease, transform 0.4s ease;
+            animation: pulse-glow 3s infinite alternate ease-in-out;
+        }
+        .profile-orb-wrapper:hover {
+            box-shadow: 0 0 40px var(--secondary-glow-start), 0 0 60px var(--secondary-glow-end);
+            transform: scale(1.08) rotateY(5deg);
+        }
+        .profile-orb-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transform: translateZ(10px);
+            transition: transform 0.4s ease;
+          
+          
+        }
+        .profile-orb-wrapper:hover img { transform: translateZ(15px) scale(1.02); }
+        .profile-orb-wrapper::before, .profile-orb-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .profile-orb-wrapper::before {
+            box-shadow: inset 0 0 20px var(--primary-color), 0 0 10px var(--primary-color);
+            opacity: 0.7;
+            animation: inner-pulse 2.5s infinite alternate ease-in-out;
+        }
+        .profile-orb-wrapper::after {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-glow-start), var(--primary-color)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotate-border 4s linear infinite, fade-border 3s infinite alternate ease-in-out;
+        }
+        @keyframes pulse-glow { 0% { box-shadow: 0 0 25px var(--primary-glow); } 50% { box-shadow: 0 0 35px var(--primary-glow), 0 0 5px rgba(0, 170, 255, 0.7); } 100% { box-shadow: 0 0 25px var(--primary-glow); } }
+        @keyframes inner-pulse { 0% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.02); } 100% { opacity: 0.7; transform: scale(1); } }
+        @keyframes rotate-border { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fade-border { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
+
+        .header .subtitle { font-size: 1.5rem; color: var(--text-color); font-weight: 400; margin-bottom: 1.5rem; }
+        .header .tagline { font-size: 1.1rem; max-width: 600px; opacity: 0.8; }
+        #typed-text { color: var(--primary-color); font-weight: 600; }
+        #typed-text::after { content: '|'; display: inline-block; animation: blink 0.7s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+        .card {
+            background: var(--card-bg-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border-color);
+            padding: 2rem; border-radius: 15px;
+            display: flex; flex-direction: column;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover { transform: translateY(-10px) perspective(1000px) rotateX(2deg) rotateY(2deg); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: var(--primary-color); }
+        .card h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        .card p { flex-grow: 1; }
+
+        #metrics { text-align: center; }
+        .metrics-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .metric-bar {
+            background: var(--card-bg-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border-color);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        .metric-bar::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--primary-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .metric-bar:hover::before { opacity: 0.3; }
+        .metric-bar:hover { transform: scale(1.02); border-color: var(--primary-color); box-shadow: 0 8px 25px var(--primary-glow); }
+        .metric-bar-content { display: flex; align-items: center; gap: 1.5rem; flex-grow: 1; }
+        .metric-bar .icon { font-size: 2.5rem; color: var(--primary-color); text-shadow: 0 0 10px var(--primary-glow); }
+        .metric-bar .text-group { text-align: left; }
+        .metric-bar h3 { font-size: 1.7rem; color: var(--heading-color); margin: 0; }
+        .metric-bar p { font-size: 0.9rem; color: var(--text-color); margin: 0; opacity: 0.8; }
+        
+        .btn, .preview-btn {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color) !important;
+            padding: 12px 30px; border-radius: 50px; text-decoration: none;
+            font-weight: 600; font-family: var(--font-family);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+        .btn:hover, .preview-btn:hover { background: var(--primary-color); color: var(--heading-color) !important; box-shadow: 0 0 25px var(--primary-glow); transform: scale(1.05); }
+        .preview-btn { margin-top: 1.5rem; padding: 10px 20px; }
+        
+        [data-animation] {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        [data-animation].visible { opacity: 1; transform: translateY(0); }
+        .grid > * { transition-delay: calc(var(--delay) * 50ms); }
+
+        .logo-carousel-container { overflow: hidden; padding: 2rem 0; position: relative; }
+        .logo-carousel-container::before, .logo-carousel-container::after { content: ''; position: absolute; top: 0; width: 100px; height: 100%; z-index: 2; background: var(--background-color); }
+        .logo-carousel-container::before { left: 0; background: linear-gradient(to right, var(--background-color), transparent); }
+        .logo-carousel-container::after { right: 0; background: linear-gradient(to left, var(--background-color), transparent); }
+        .tools-grid { display: flex; width: calc(200px * 12); animation: scroll 30s linear infinite; }
+        .tools-grid:hover { animation-play-state: paused; }
+        .tool-item { width: 200px; display: flex; justify-content: center; align-items: center; }
+        .tool-item img { height: 60px; filter: grayscale(1) brightness(1.5) opacity(0.7); transition: all 0.3s ease; }
+        .tool-item:hover img { filter: grayscale(0) brightness(1) opacity(1); transform: scale(1.1); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-200px * 6)); } }
+        
+        .modal-container { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; animation: fadeIn 0.3s ease; }
+        .modal-content { background: var(--card-bg-color); border: 1px solid var(--card-border-color); padding: 2rem; border-radius: 15px; max-width: 90%; width: 700px; position: relative; box-shadow: 0 5px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; }
+        .close-btn { position: absolute; top: 15px; right: 25px; color: #aaa; font-size: 2.5rem; font-weight: bold; cursor: pointer; transition: color 0.3s ease; }
+        .close-btn:hover { color: var(--primary-color); }
+        #modal-image { width: 100%; border-radius: 5px; margin-bottom: 1.5rem; }
+        #modal-title { color: var(--primary-color); }
+        #modal-description { line-height: 1.7; }
+        
+        #contact { text-align: center; }
+        #contact p { margin-bottom: 2rem; font-size: 1.1rem; }
+        
+        .footer { background-color: transparent; text-align: center; padding: 2rem 0; margin-top: 40px; border-top: 1px solid var(--card-border-color); }
+        .social-links a { color: var(--text-color); font-size: 1.5rem; margin: 0 10px; transition: all 0.3s ease; display: inline-flex; align-items: center; vertical-align: middle; text-decoration: none; }
+        .social-links a:hover { color: var(--primary-color); transform: translateY(-5px) scale(1.1); }
+        .fiverr-icon { display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border: 2px solid var(--text-color); border-radius: 50%; font-weight: 700; font-size: 0.9rem; transition: all 0.3s ease; }
+        .social-links a:hover .fiverr-icon { border-color: var(--primary-color); }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media(max-width: 768px) { h1 { font-size: 2.5rem; } h2 { font-size: 1.8rem; } }
+    </style>
+</head>
+<body>
+
+<header class="header" data-animation="fade-up">
+    <div class="profile-orb-container">
+        <div class="profile-orb-wrapper">
+           <img src="profile.jpg" alt="Thomas Profile Picture">
+        </div>
+    </div>
+    <h1 id="main-title"></h1>
+    <p class="subtitle">I specialize in <span id="typed-text"></span></p>
+    <p class="tagline">Delivering accurate, efficient, and reliable data management services to help your business thrive.</p>
+</header>
+
+<main>
+
+<section id="metrics" class="container" data-animation="fade-up">
+    <h2 data-animation="fade-up">Key Features</h2>
+    <div class="metrics-wrapper">
+        <div class="metric-bar" data-animation="fade-up" style="--delay: 1;"><div class="metric-bar-content"><div class="icon"><i class="fas fa-bullseye"></i></div><div class="text-group"><h3>99.8%</h3><p>Accuracy Rate</p></div></div></div>
+        <div class="metric-bar" data-animation="fade-up" style="--delay: 2;"><div class="metric-bar-content"><div class="icon"><i class="fas fa-keyboard"></i></div><div class="text-group"><h3>80 WPM</h3><p>Typing Speed</p></div></div></div>
+        <div class="metric-bar" data-animation="fade-up" style="--delay: 3;"><div class="metric-bar-content"><div class="icon"><i class="fas fa-check-double"></i></div><div class="text-group"><h3>3+</h3><p>Projects Completed</p></div></div></div>
+        <div class="metric-bar" data-animation="fade-up" style="--delay: 4;"><div class="metric-bar-content"><div class="icon"><i class="fas fa-star"></i></div><div class="text-group"><h3>5-Star</h3><p>Client Rating</p></div></div></div>
+    </div>
+</section>
+
+<section id="about" class="container" data-animation="fade-up">
+    <h2 data-animation="fade-up">About Me</h2>
+    <p data-animation="fade-up" style="--delay: 1;">Hi, I'm Thomas and I'm a detail-oriented and highly organized Data Entry Expert with over 1.5 years of experience in data processing, management, and quality assurance. My core strengths lie in my exceptional typing speed, meticulous attention to detail, and proficiency in a wide range of data management tools. I am dedicated to maintaining data integrity and delivering high-quality results on schedule.</p>
+</section>
+
+<section id="services" class="container" data-animation="fade-up">
+    <h2 data-animation="fade-up">Services I Offer</h2>
+    <div class="grid">
+        <div class="card" data-animation="fade-up" style="--delay: 1;"><h3>Data Entry (Online/Offline)</h3><p>Accurate and fast entry of data from various sources into digital formats like Excel, Google Sheets, or CRM systems.</p></div>
+        <div class="card" data-animation="fade-up" style="--delay: 2;"><h3>Data Cleansing & Formatting</h3><p>Identifying and correcting errors, inconsistencies, and duplicates to ensure your data is clean and reliable.</p></div>
+        <div class="card" data-animation="fade-up" style="--delay: 3;"><h3>Web Research & Data Mining</h3><p>Gathering specific information from websites and organizing it into a structured and usable format.</p></div>
+        <div class="card" data-animation="fade-up" style="--delay: 4;"><h3>Copy & Paste Tasks</h3><p>Efficiently handling high-volume copy-paste jobs with perfect accuracy and adherence to instructions.</p></div>
+        <div class="card" data-animation="fade-up" style="--delay: 5;"><h3>CRM Data Entry</h3><p>Managing and updating customer information in CRM platforms like Salesforce, HubSpot, or Zoho.</p></div>
+        <div class="card" data-animation="fade-up" style="--delay: 6;"><h3>PDF to Excel/Word Conversion</h3><p>Manually converting data from PDF documents to editable Excel spreadsheets or Word files with precision.</p></div>
+    </div>
+</section>
+
+<section id="portfolio" class="container" data-animation="fade-up">
+    <h2 data-animation="fade-up">Work Samples</h2>
+    <div class="grid">
+        <div class="card" data-animation="fade-up" style="--delay: 1;" data-image="pic2.jpg" data-title="E-commerce Product Listing" data-description="I worked on creating and optimizing product listings for an online store, ensuring that each item had accurate descriptions, correct pricing, and proper categorization. By paying attention to detail and formatting the content in an SEO-friendly way, I helped improve product visibility and made it easier for customers to find what they were looking for. This not only enhanced the shopping experience but also supported higher sales conversions.">
+            <h3>E-commerce Product Listing</h3><p>Entered 5,000+ product details into a Shopify database with 99.9% accuracy, finishing 2 days ahead of schedule.</p><button class="preview-btn">View Preview</button>
+        </div>
+        <div class="card" data-animation="fade-up" style="--delay: 2;" data-image="pic1.jpg" data-title="Real Estate Database Cleanup" data-description="In this project, I was responsible for reviewing and cleaning up a large real estate database. I standardized property records, removed duplicate entries, and corrected inconsistencies to ensure the data was reliable and easy to use. The result was a more organized system that allowed agents and clients to quickly access accurate information, improving efficiency in property searches and reporting.">
+            <h3>Real Estate Database Cleanup</h3><p>Cleaned and standardized a 10,000+ entry real estate database, removing duplicates and correcting formatting errors.</p><button class="preview-btn">View Preview</button>
+        </div>
+        <div class="card" data-animation="fade-up" style="--delay: 3;" data-image="pic3.png" data-title="Your New Project Title Here" data-description="For the lead generation project, I researched and compiled verified business contacts, entering them into a structured database for sales and marketing teams. I ensured that all information was accurate, well-organized, and easy to filter, which made outreach campaigns more effective. This work directly supported client acquisition efforts by providing a clean and dependable source of leads.">
+            <h3>B2B Lead Generation Data Entry</h3><p>Collected and verified 1,000 emails for accurate B2B lead generation.</p><button class="preview-btn">View Preview</button>
+        </div>
+    </div>
+</section>
+
+<section id="tools" data-animation="fade-up">
+    <div class="container">
+        <h2 data-animation="fade-up">Tools & Proficiency</h2>
+        <div class="logo-carousel-container">
+            <div class="tools-grid">
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-excel-2019.png" alt="Microsoft Excel"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-word-2019.png" alt="Microsoft Word"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-powerpoint-2019.png" alt="Microsoft PowerPoint"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/google-sheets.png" alt="Google Sheets"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/google-docs.png" alt="Google Docs"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/pdf.png" alt="PDF"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-excel-2019.png" alt="Microsoft Excel"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-word-2019.png" alt="Microsoft Word"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-powerpoint-2019.png" alt="Microsoft PowerPoint"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/google-sheets.png" alt="Google Sheets"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/google-docs.png" alt="Google Docs"/></div>
+                <div class="tool-item"><img src="https://img.icons8.com/color/96/pdf.png" alt="PDF"/></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="container" data-animation="fade-up">
+    <h2 data-animation="fade-up">Let's Work Together</h2>
+    <p data-animation="fade-up" style="--delay: 1;">I am currently available for freelance projects. If you have a project in mind, I would love to hear from you!</p>
+    <div data-animation="fade-up" style="--delay: 2;">
+        <a href="mailto:thomas@gmail.com?subject=Freelancing%20Project%20Inquiry&body=Hey%2C%20Albin%20Thomas%20Are%20you%20available%20for%20Freelancing%20Project%3F" class="btn"><i class="fas fa-envelope"></i> Contact Me</a>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="container" data-animation="fade-up">
+        <div class="social-links">
+            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="Fiverr"><span class="fiverr-icon">Fi</span></a>
+            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <br><p>&copy;2025 by Thomas. All rights reserved.</p>
+    </div>
+</footer>
+
+<div id="modal-container" class="modal-container">
+    <div id="modal-content" class="modal-content">
+        <span class="close-btn">&times;</span>
+        <img src="" id="modal-image" alt="Project Preview">
+        <h3 id="modal-title"></h3>
+        <p id="modal-description"></p>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+
+const titleElement = document.getElementById('main-title');
+const titleText = "Thomas - Data Entry Specialist"; 
+let i = 0;
+
+function typeTitleOnce() {
+    if (i < titleText.length) {
+        titleElement.textContent += titleText.charAt(i);
+        i++;
+        setTimeout(typeTitleOnce, 100); 
+    } else {
+        titleElement.style.borderRight = 'none';
+    }
+}
+typeTitleOnce(); 
+
+   
+    const typedTextSpan = document.getElementById("typed-text");
+    const textArray = ["Data Entry", "Data Cleansing", "Web Research", "CRM Management"];
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function typeSubtitle() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(typeSubtitle, 100);
+        } else {
+            setTimeout(eraseSubtitle, 2000);
+        }
+    }
+
+    function eraseSubtitle() {
+        if (charIndex > 0) {
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(eraseSubtitle, 50);
+        } else {
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(typeSubtitle, 500);
+        }
+    }
+    typeSubtitle(); 
+    
+
+   
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+            if (entry.target.tagName === 'H2' && entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+
+    const animatedElements = document.querySelectorAll('[data-animation], h2');
+    animatedElements.forEach(el => observer.observe(el));
+
+
+ 
+    const metricBars = document.querySelectorAll('.metric-bar');
+    metricBars.forEach(bar => {
+        bar.addEventListener('mousemove', (e) => {
+            const rect = bar.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            bar.style.setProperty('--mouse-x', `${x}px`);
+            bar.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    const previewBtns = document.querySelectorAll('.preview-btn');
+    const modalContainer = document.getElementById('modal-container');
+    const closeBtn = document.querySelector('.close-btn');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+
+    previewBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.card');
+            modalImage.src = card.getAttribute('data-image');
+            modalTitle.textContent = card.getAttribute('data-title');
+            modalDescription.textContent = card.getAttribute('data-description');
+            modalContainer.style.display = 'flex';
+            document.body.classList.add('modal-open');
+        });
+    });
+
+    function closeModal() {
+        modalContainer.style.display = 'none';
+        document.body.classList.remove('modal-open');
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modalContainer.addEventListener('click', (event) => { if (event.target === modalContainer) closeModal(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeModal(); });
+});
+</script>
+</body>
+</html>
