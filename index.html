@@ -68,7 +68,11 @@
         }
         #hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; }
         #hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; color: var(--secondary-text); }
-        main section { padding: 80px 0; border-bottom: 1px solid var(--border-color); }
+        main section { 
+            padding: 80px 0; 
+            border-bottom: 1px solid var(--border-color); 
+            user-select: none; /* Prevents text selection */
+        }
         h2, h3, h4 { color: var(--primary-text); margin-bottom: 1rem; font-weight: 600; }
         h2 { font-size: 2.8rem; text-align: center; margin-bottom: 40px; }
         h3 { font-size: 1.8rem; margin-top: 2rem; }
@@ -130,7 +134,12 @@
         }
         .test-title { font-size: 1.5rem; font-weight: 600; }
         .timer { font-size: 1.5rem; font-weight: 600; color: var(--accent-color); }
-        .test-body { flex-grow: 1; overflow-y: auto; padding: 40px; }
+        .test-body { 
+            flex-grow: 1; 
+            overflow-y: auto; 
+            padding: 40px; 
+            user-select: none; /* Prevents text selection */
+        }
         .test-question-section { margin-bottom: 40px; }
         .test-passage { background-color: var(--secondary-bg); padding: 20px; border-radius: 8px; border-left: 3px solid var(--accent-color); margin-bottom: 20px; }
         .question-block { margin-bottom: 15px; }
@@ -500,7 +509,7 @@
                     const lockoutEndTime = localStorage.getItem(`${testType}_lockout_end`);
 
                     if (lockoutEndTime && Date.now() < lockoutEndTime) {
-                        btn.disabled = true;                       
+                        btn.disabled = true;                            
                         if (lockoutTimers[testType]) {
                             clearInterval(lockoutTimers[testType]);
                         }
@@ -520,7 +529,7 @@
                             }
                         }, 1000);
                     } else {
-             
+                    
                         if (!btn.dataset.originalText) {
                            btn.dataset.originalText = btn.textContent;
                         }
@@ -575,6 +584,11 @@
                     notification.classList.remove('show');
                 }, 4000);
             }
+            document.addEventListener('copy', function(event) {
+                event.preventDefault(); 
+                event.clipboardData.setData('text/plain', 'STOP CHEATING PLEASE'); 
+                showNotification("Copying content is not allowed.", "info");
+            });
 
             checkTestLocks();
         });
