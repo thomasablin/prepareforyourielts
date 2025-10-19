@@ -3,489 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thomas - Data Entry Specialist</title>
-    
+    <title>PrepareForYourIELTS | Preparation & Mock Tests</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #00aaff;
-            --primary-glow: rgba(0, 170, 255, 0.5);
-            --background-color: #121222;
-            --card-bg-color: rgba(255, 255, 255, 0.07);
-            --card-border-color: rgba(255, 255, 255, 0.2);
-            --text-color: #e0e0e0;
-            --heading-color: #ffffff;
-            --font-family: 'Poppins', sans-serif;
-            --secondary-glow-start: rgba(138, 43, 226, 0.5);
-            --secondary-glow-end: rgba(0, 255, 135, 0.5);
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --border-color: #333;
+            --primary-text: #e0e0e0;
+            --secondary-text: #a0a0a0;
+            --accent-color: #00aaff;
+            --accent-hover: #00c6ff;
+            --success-color: #4CAF50;
+            --danger-color: #f44336;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
         body {
-            font-family: var(--font-family);
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            line-height: 1.7;
         }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(0, 170, 255, 0.3), transparent 30%),
-                radial-gradient(circle at 90% 80%, rgba(138, 43, 226, 0.3), transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(0, 255, 135, 0.2), transparent 35%);
-            animation: aurora 20s linear infinite alternate;
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        header {
+            background-color: rgba(30, 30, 30, .8);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 998;
+            width: 100%;
+            backdrop-filter: blur(10px);
         }
-
-        @keyframes aurora {
-            0% { transform: rotate(0deg) scale(1.2); }
-            100% { transform: rotate(360deg) scale(1.5); }
-        }
-
-        body.modal-open { overflow: hidden; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; position: relative; z-index: 2; }
-        h1, h2, h3 { color: var(--heading-color); margin-bottom: 1rem; }
-        h1 { font-size: 3.5rem; font-weight: 700; text-shadow: 0 0 15px var(--primary-glow); min-height: 1.2em; }
-        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 4rem; position: relative; }
-        
-        h2::after {
-            content: ''; position: absolute; bottom: -15px; left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 100px; height: 4px;
-            background: var(--primary-color);
-            box-shadow: 0 0 10px var(--primary-glow);
-            border-radius: 2px;
-            transition: transform 0.5s ease-out;
-        }
-        h2.visible::after { transform: translateX(-50%) scaleX(1); }
-
-        section { padding: 80px 0; }
-
-        .header {
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            padding: 0 20px;
-        }
-        
-        #main-title {
-            display: inline-block;
-            border-right: .1em solid var(--primary-color);
-            white-space: nowrap;
-            overflow: hidden;
-            vertical-align: bottom;
-            animation: blink-caret .75s step-end infinite;
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--primary-color); }
-        }
-
-        .profile-orb-container {
-            width: 180px;
-            height: 180px;
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        #site-title { font-size: 1.8rem; font-weight: 700; }
+        nav ul { list-style: none; display: flex; gap: 25px; }
+        nav a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color .3s ease;
             position: relative;
-            margin-bottom: 2.5rem;
+            padding-bottom: 5px;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width .3s ease;
+        }
+        nav a:hover { color: var(--primary-text); }
+        nav a:hover::after { width: 100%; }
+        #hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(18, 18, 18, .8), rgba(18, 18, 18, .8)), url(https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop) no-repeat center center/cover;
+        }
+        #hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; }
+        #hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; color: var(--secondary-text); }
+        main section { padding: 80px 0; border-bottom: 1px solid var(--border-color); }
+        h2, h3, h4 { color: var(--primary-text); margin-bottom: 1rem; font-weight: 600; }
+        h2 { font-size: 2.8rem; text-align: center; margin-bottom: 40px; }
+        h3 { font-size: 1.8rem; margin-top: 2rem; }
+        h4 { font-size: 1.3rem; margin-top: 1.5rem; }
+        .content-card {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+            transition: transform .3s ease, box-shadow .3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .content-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 170, 255, .1); }
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .3s ease;
+            border: none;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: auto;
+        }
+        .btn-primary { background-color: var(--accent-color); color: #fff; box-shadow: 0 4px 15px rgba(0, 170, 255, .3); }
+        .btn-primary:hover { background-color: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 170, 255, .4); }
+        .btn-secondary { background-color: transparent; color: var(--primary-text); border: 2px solid var(--border-color); }
+        .btn-secondary:hover { background-color: var(--border-color); border-color: var(--accent-color); }
+        .test-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-bg);
+            z-index: 1001;
+            display: none;
+            flex-direction: column;
+        }
+        .test-header {
+            background-color: var(--secondary-bg);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .test-title { font-size: 1.5rem; font-weight: 600; }
+        .timer { font-size: 1.5rem; font-weight: 600; color: var(--accent-color); }
+        .test-body { flex-grow: 1; overflow-y: auto; padding: 40px; }
+        .test-question-section { margin-bottom: 40px; }
+        .test-passage { background-color: var(--secondary-bg); padding: 20px; border-radius: 8px; border-left: 3px solid var(--accent-color); margin-bottom: 20px; }
+        .question-block { margin-bottom: 15px; }
+        .question-block label { display: block; margin-bottom: 10px; font-weight: 500; }
+        .question-block textarea, .question-block input {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            color: var(--primary-text);
+            border-radius: 6px;
+        }
+        .question-block textarea { min-height: 150px; resize: vertical; }
+        #mock-test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .8);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        .profile-orb-wrapper {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            box-shadow: 0 0 25px var(--primary-glow);
-            transition: box-shadow 0.4s ease, transform 0.4s ease;
-            animation: pulse-glow 3s infinite alternate ease-in-out;
-        }
-        .profile-orb-wrapper:hover {
-            box-shadow: 0 0 40px var(--secondary-glow-start), 0 0 60px var(--secondary-glow-end);
-            transform: scale(1.08) rotateY(5deg);
-        }
-        .profile-orb-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            transform: translateZ(10px);
-            transition: transform 0.4s ease;
-          
-          
-        }
-        .profile-orb-wrapper:hover img { transform: translateZ(15px) scale(1.02); }
-        .profile-orb-wrapper::before, .profile-orb-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .profile-orb-wrapper::before {
-            box-shadow: inset 0 0 20px var(--primary-color), 0 0 10px var(--primary-color);
-            opacity: 0.7;
-            animation: inner-pulse 2.5s infinite alternate ease-in-out;
-        }
-        .profile-orb-wrapper::after {
-            border: 2px solid transparent;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-glow-start), var(--primary-color)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: rotate-border 4s linear infinite, fade-border 3s infinite alternate ease-in-out;
-        }
-        @keyframes pulse-glow { 0% { box-shadow: 0 0 25px var(--primary-glow); } 50% { box-shadow: 0 0 35px var(--primary-glow), 0 0 5px rgba(0, 170, 255, 0.7); } 100% { box-shadow: 0 0 25px var(--primary-glow); } }
-        @keyframes inner-pulse { 0% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.02); } 100% { opacity: 0.7; transform: scale(1); } }
-        @keyframes rotate-border { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes fade-border { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
-
-        .header .subtitle { font-size: 1.5rem; color: var(--text-color); font-weight: 400; margin-bottom: 1.5rem; }
-        .header .tagline { font-size: 1.1rem; max-width: 600px; opacity: 0.8; }
-        #typed-text { color: var(--primary-color); font-weight: 600; }
-        #typed-text::after { content: '|'; display: inline-block; animation: blink 0.7s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
-        .card {
-            background: var(--card-bg-color);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border-color);
-            padding: 2rem; border-radius: 15px;
-            display: flex; flex-direction: column;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        .card:hover { transform: translateY(-10px) perspective(1000px) rotateX(2deg) rotateY(2deg); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: var(--primary-color); }
-        .card h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
-        .card p { flex-grow: 1; }
-
-        #metrics { text-align: center; }
-        .metrics-wrapper {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .metric-bar {
-            background: var(--card-bg-color);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border-color);
-            padding: 1.5rem 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            transition: all 0.4s ease;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-        }
-        .metric-bar::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--primary-glow) 0%, transparent 70%);
+            z-index: 1000;
             opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: -1;
+            visibility: hidden;
+            transition: opacity .3s ease, visibility .3s ease;
         }
-        .metric-bar:hover::before { opacity: 0.3; }
-        .metric-bar:hover { transform: scale(1.02); border-color: var(--primary-color); box-shadow: 0 8px 25px var(--primary-glow); }
-        .metric-bar-content { display: flex; align-items: center; gap: 1.5rem; flex-grow: 1; }
-        .metric-bar .icon { font-size: 2.5rem; color: var(--primary-color); text-shadow: 0 0 10px var(--primary-glow); }
-        .metric-bar .text-group { text-align: left; }
-        .metric-bar h3 { font-size: 1.7rem; color: var(--heading-color); margin: 0; }
-        .metric-bar p { font-size: 0.9rem; color: var(--text-color); margin: 0; opacity: 0.8; }
-        
-        .btn, .preview-btn {
-            display: inline-block;
-            background: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color) !important;
-            padding: 12px 30px; border-radius: 50px; text-decoration: none;
-            font-weight: 600; font-family: var(--font-family);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--primary-glow);
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
+        .modal-content {
+            background-color: var(--secondary-bg);
+            padding: 35px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--border-color);
+            transform: scale(.9);
+            transition: transform .3s ease;
         }
-        .btn:hover, .preview-btn:hover { background: var(--primary-color); color: var(--heading-color) !important; box-shadow: 0 0 25px var(--primary-glow); transform: scale(1.05); }
-        .preview-btn { margin-top: 1.5rem; padding: 10px 20px; }
-        
-        [data-animation] {
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+        .modal-content h2 { margin-top: 0; }
+        .modal-buttons { display: flex; justify-content: flex-end; gap: 15px; margin-top: 25px; }
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--secondary-text);
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+        .content-card ul { list-style: none; }
+        .content-card li { margin-bottom: 15px; padding-left: 25px; position: relative; }
+        .content-card li::before { content: '✓'; color: var(--accent-color); position: absolute; left: 0; font-weight: bold; }
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            z-index: 1002;
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            visibility: hidden;
+            transition: all .5s ease;
         }
-        [data-animation].visible { opacity: 1; transform: translateY(0); }
-        .grid > * { transition-delay: calc(var(--delay) * 50ms); }
-
-        .logo-carousel-container { overflow: hidden; padding: 2rem 0; position: relative; }
-        .logo-carousel-container::before, .logo-carousel-container::after { content: ''; position: absolute; top: 0; width: 100px; height: 100%; z-index: 2; background: var(--background-color); }
-        .logo-carousel-container::before { left: 0; background: linear-gradient(to right, var(--background-color), transparent); }
-        .logo-carousel-container::after { right: 0; background: linear-gradient(to left, var(--background-color), transparent); }
-        .tools-grid { display: flex; width: calc(200px * 12); animation: scroll 30s linear infinite; }
-        .tools-grid:hover { animation-play-state: paused; }
-        .tool-item { width: 200px; display: flex; justify-content: center; align-items: center; }
-        .tool-item img { height: 60px; filter: grayscale(1) brightness(1.5) opacity(0.7); transition: all 0.3s ease; }
-        .tool-item:hover img { filter: grayscale(0) brightness(1) opacity(1); transform: scale(1.1); }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-200px * 6)); } }
-        
-        .modal-container { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; animation: fadeIn 0.3s ease; }
-        .modal-content { background: var(--card-bg-color); border: 1px solid var(--card-border-color); padding: 2rem; border-radius: 15px; max-width: 90%; width: 700px; position: relative; box-shadow: 0 5px 25px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; }
-        .close-btn { position: absolute; top: 15px; right: 25px; color: #aaa; font-size: 2.5rem; font-weight: bold; cursor: pointer; transition: color 0.3s ease; }
-        .close-btn:hover { color: var(--primary-color); }
-        #modal-image { width: 100%; border-radius: 5px; margin-bottom: 1.5rem; }
-        #modal-title { color: var(--primary-color); }
-        #modal-description { line-height: 1.7; }
-        
-        #contact { text-align: center; }
-        #contact p { margin-bottom: 2rem; font-size: 1.1rem; }
-        
-        .footer { background-color: transparent; text-align: center; padding: 2rem 0; margin-top: 40px; border-top: 1px solid var(--card-border-color); }
-        .social-links a { color: var(--text-color); font-size: 1.5rem; margin: 0 10px; transition: all 0.3s ease; display: inline-flex; align-items: center; vertical-align: middle; text-decoration: none; }
-        .social-links a:hover { color: var(--primary-color); transform: translateY(-5px) scale(1.1); }
-        .fiverr-icon { display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border: 2px solid var(--text-color); border-radius: 50%; font-weight: 700; font-size: 0.9rem; transition: all 0.3s ease; }
-        .social-links a:hover .fiverr-icon { border-color: var(--primary-color); }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @media(max-width: 768px) { h1 { font-size: 2.5rem; } h2 { font-size: 1.8rem; } }
+        .notification.show { opacity: 1; visibility: visible; bottom: 30px; }
+        .notification.info { background-color: var(--accent-color); }
+        .notification.success { background-color: var(--success-color); }
     </style>
 </head>
 <body>
-
-<header class="header" data-animation="fade-up">
-    <div class="profile-orb-container">
-        <div class="profile-orb-wrapper">
-           <img src="profile.jpg" alt="Thomas Profile Picture">
-        </div>
-    </div>
-    <h1 id="main-title"></h1>
-    <p class="subtitle">I specialize in <span id="typed-text"></span></p>
-    <p class="tagline">Delivering accurate, efficient, and reliable data management services to help your business thrive.</p>
-</header>
-
-<main>
-
-<section id="metrics" class="container" data-animation="fade-up">
-    <h2 data-animation="fade-up">Key Features</h2>
-    <div class="metrics-wrapper">
-        <div class="metric-bar" data-animation="fade-up" style="--delay: 1;"><div class="metric-bar-content"><div class="icon"><i class="fas fa-bullseye"></i></div><div class="text-group"><h3>99.8%</h3><p>Accuracy Rate</p></div></div></div>
-        <div class="metric-bar" data-animation="fade-up" style="--delay: 2;"><div class="metric-bar-content"><div class="icon"><i class="fas fa-keyboard"></i></div><div class="text-group"><h3>80 WPM</h3><p>Typing Speed</p></div></div></div>
-        <div class="metric-bar" data-animation="fade-up" style="--delay: 3;"><div class="metric-bar-content"><div class="icon"><i class="fas fa-check-double"></i></div><div class="text-group"><h3>3+</h3><p>Projects Completed</p></div></div></div>
-        <div class="metric-bar" data-animation="fade-up" style="--delay: 4;"><div class="metric-bar-content"><div class="icon"><i class="fas fa-star"></i></div><div class="text-group"><h3>5-Star</h3><p>Client Rating</p></div></div></div>
-    </div>
-</section>
-
-<section id="about" class="container" data-animation="fade-up">
-    <h2 data-animation="fade-up">About Me</h2>
-    <p data-animation="fade-up" style="--delay: 1;">Hi, I'm Thomas and I'm a detail-oriented and highly organized Data Entry Expert with over 1.5 years of experience in data processing, management, and quality assurance. My core strengths lie in my exceptional typing speed, meticulous attention to detail, and proficiency in a wide range of data management tools. I am dedicated to maintaining data integrity and delivering high-quality results on schedule.</p>
-</section>
-
-<section id="services" class="container" data-animation="fade-up">
-    <h2 data-animation="fade-up">Services I Offer</h2>
-    <div class="grid">
-        <div class="card" data-animation="fade-up" style="--delay: 1;"><h3>Data Entry (Online/Offline)</h3><p>Accurate and fast entry of data from various sources into digital formats like Excel, Google Sheets, or CRM systems.</p></div>
-        <div class="card" data-animation="fade-up" style="--delay: 2;"><h3>Data Cleansing & Formatting</h3><p>Identifying and correcting errors, inconsistencies, and duplicates to ensure your data is clean and reliable.</p></div>
-        <div class="card" data-animation="fade-up" style="--delay: 3;"><h3>Web Research & Data Mining</h3><p>Gathering specific information from websites and organizing it into a structured and usable format.</p></div>
-        <div class="card" data-animation="fade-up" style="--delay: 4;"><h3>Copy & Paste Tasks</h3><p>Efficiently handling high-volume copy-paste jobs with perfect accuracy and adherence to instructions.</p></div>
-        <div class="card" data-animation="fade-up" style="--delay: 5;"><h3>CRM Data Entry</h3><p>Managing and updating customer information in CRM platforms like Salesforce, HubSpot, or Zoho.</p></div>
-        <div class="card" data-animation="fade-up" style="--delay: 6;"><h3>PDF to Excel/Word Conversion</h3><p>Manually converting data from PDF documents to editable Excel spreadsheets or Word files with precision.</p></div>
-    </div>
-</section>
-
-<section id="portfolio" class="container" data-animation="fade-up">
-    <h2 data-animation="fade-up">Work Samples</h2>
-    <div class="grid">
-        <div class="card" data-animation="fade-up" style="--delay: 1;" data-image="pic2.jpg" data-title="E-commerce Product Listing" data-description="I worked on creating and optimizing product listings for an online store, ensuring that each item had accurate descriptions, correct pricing, and proper categorization. By paying attention to detail and formatting the content in an SEO-friendly way, I helped improve product visibility and made it easier for customers to find what they were looking for. This not only enhanced the shopping experience but also supported higher sales conversions.">
-            <h3>E-commerce Product Listing</h3><p>Entered 5,000+ product details into a Shopify database with 99.9% accuracy, finishing 2 days ahead of schedule.</p><button class="preview-btn">View Preview</button>
-        </div>
-        <div class="card" data-animation="fade-up" style="--delay: 2;" data-image="pic1.jpg" data-title="Real Estate Database Cleanup" data-description="In this project, I was responsible for reviewing and cleaning up a large real estate database. I standardized property records, removed duplicate entries, and corrected inconsistencies to ensure the data was reliable and easy to use. The result was a more organized system that allowed agents and clients to quickly access accurate information, improving efficiency in property searches and reporting.">
-            <h3>Real Estate Database Cleanup</h3><p>Cleaned and standardized a 10,000+ entry real estate database, removing duplicates and correcting formatting errors.</p><button class="preview-btn">View Preview</button>
-        </div>
-        <div class="card" data-animation="fade-up" style="--delay: 3;" data-image="pic3.png" data-title="Your New Project Title Here" data-description="For the lead generation project, I researched and compiled verified business contacts, entering them into a structured database for sales and marketing teams. I ensured that all information was accurate, well-organized, and easy to filter, which made outreach campaigns more effective. This work directly supported client acquisition efforts by providing a clean and dependable source of leads.">
-            <h3>B2B Lead Generation Data Entry</h3><p>Collected and verified 1,000 emails for accurate B2B lead generation.</p><button class="preview-btn">View Preview</button>
-        </div>
-    </div>
-</section>
-
-<section id="tools" data-animation="fade-up">
-    <div class="container">
-        <h2 data-animation="fade-up">Tools & Proficiency</h2>
-        <div class="logo-carousel-container">
-            <div class="tools-grid">
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-excel-2019.png" alt="Microsoft Excel"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-word-2019.png" alt="Microsoft Word"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-powerpoint-2019.png" alt="Microsoft PowerPoint"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/google-sheets.png" alt="Google Sheets"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/google-docs.png" alt="Google Docs"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/pdf.png" alt="PDF"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-excel-2019.png" alt="Microsoft Excel"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-word-2019.png" alt="Microsoft Word"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/microsoft-powerpoint-2019.png" alt="Microsoft PowerPoint"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/google-sheets.png" alt="Google Sheets"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/google-docs.png" alt="Google Docs"/></div>
-                <div class="tool-item"><img src="https://img.icons8.com/color/96/pdf.png" alt="PDF"/></div>
+    <div id="terms-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Terms and Conditions</h2>
+            <p>This website is provided solely for educational purposes to assist users in their IELTS preparation. All content is developed and authored by Sarnab Bhattacharjee.</p>
+            <p>Users are expected to utilize this platform responsibly and fairly. Any form of unauthorized use, including but not limited to data scraping, reproduction of content without permission, or malicious activity, may result in a permanent ban or legal action.</p>
+            <p>If you encounter any issues, have questions, or need support regarding the website, please reach out through the contact information provided- "acom57718@gmail.com"  Your use of this website constitutes your agreement to these terms.</p>
+            <div class="modal-buttons">
+                <button id="disagree-btn" class="btn btn-secondary">Disagree</button>
+                <button id="agree-btn" class="btn btn-primary">Agree</button>
             </div>
         </div>
     </div>
-</section>
+    <div id="warning-modal" class="modal-overlay"><div class="modal-content"><h2 id="warning-title">Heads Up!</h2><p id="warning-text">This is a timed test. Once you begin, you cannot pause or navigate away from this page. Leaving the page will result in disqualification. Please ensure you are prepared before proceeding.</p><div class="modal-buttons"><button id="cancel-test-btn" class="btn btn-secondary">I'm Not Ready</button><button id="proceed-test-btn" class="btn btn-primary">Proceed</button></div></div></div>
+    <div id="disqualified-modal" class="modal-overlay"><div class="modal-content"><h2>Test Disqualified</h2><p>You navigated away from the page during the test. For fair practice, this attempt has been disqualified. Please feel free to try again when you are ready to focus.</p><div class="modal-buttons"><button id="close-dq-modal" class="btn btn-primary">Understood</button></div></div></div>
+    <div id="notification-popup" class="notification"></div>
 
-<section id="contact" class="container" data-animation="fade-up">
-    <h2 data-animation="fade-up">Let's Work Together</h2>
-    <p data-animation="fade-up" style="--delay: 1;">I am currently available for freelance projects. If you have a project in mind, I would love to hear from you!</p>
-    <div data-animation="fade-up" style="--delay: 2;">
-        <a href="mailto:thomas@gmail.com?subject=Freelancing%20Project%20Inquiry&body=Hey%2C%20Albin%20Thomas%20Are%20you%20available%20for%20Freelancing%20Project%3F" class="btn"><i class="fas fa-envelope"></i> Contact Me</a>
-    </div>
-</section>
-
-</main>
-
-<footer class="footer">
-    <div class="container" data-animation="fade-up">
-        <div class="social-links">
-            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="Fiverr"><span class="fiverr-icon">Fi</span></a>
-            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="(ekhane apnar social link gulo dete hobe)" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <form id="reading-test-interface" class="test-overlay" action="https://formspree.io/f/xanpkqvg" method="POST">
+        <div class="test-header"><div class="test-title">Reading Test</div><div id="reading-timer" class="timer">60:00</div></div>
+        <div class="test-body container">
+            <input type="hidden" name="_next" value="https://your-github-username.github.io/your-repo-name/thankyou.html"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_subject" value="New IELTS Reading Test Submission!">
+            <div class="test-question-section"><h4>Reading Passage 1</h4><div class="test-passage"><p>The concept of 'emotional intelligence' (EI) was first popularized in 1995 by psychologist Daniel Goleman...</p></div><div class="question-block"><label>Questions 1-5</label><input type="text" name="R_Q1" placeholder="1. Who popularized the concept of EI?" required><input type="text" name="R_Q2" placeholder="2. In what year was EI popularized?" required><input type="text" name="R_Q3" placeholder="3. How many main components are in Goleman's model?" required><input type="text" name="R_Q4" placeholder="4. What component involves understanding others' feelings?" required><input type="text" name="R_Q5" placeholder="5. What ability involves controlling one's own emotions?" required></div></div>
+            <div class="test-question-section"><h4>Reading Passage 2</h4><div class="test-passage"><p>The Great Barrier Reef, off the coast of Queensland in Australia, is the largest living thing on Earth...</p></div><div class="question-block"><label>Questions 6-13</label><input type="text" name="R_Q6" placeholder="6. The Great Barrier Reef is 2,300km long. (T/F/NG)" required><input type="text" name="R_Q7" placeholder="7. The reef can be seen from the moon. (T/F/NG)" required><input type="text" name="R_Q8" placeholder="8. Pollution from tourism is the main threat. (T/F/NG)" required><input type="text" name="R_Q9" placeholder="9. The reef contains over 600 types of coral. (T/F/NG)" required><input type="text" name="R_Q10" placeholder="10. Conservation efforts have been largely successful. (T/F/NG)" required><input type="text" name="R_Q11" placeholder="11. The reef is home to sharks. (T/F/NG)" required><input type="text" name="R_Q12" placeholder="12. Agricultural runoff is a form of pollution. (T/F/NG)" required><input type="text" name="R_Q13" placeholder="13. The reef is located in Western Australia. (T/F/NG)" required></div></div>
+            <div class="test-question-section"><h4>Reading Passage 3</h4><div class="test-passage"><p>Automation and artificial intelligence (AI) are poised to transform the modern workplace...</p></div><div class="question-block"><label>Questions 14-27</label><input type="text" name="R_Q14_15" placeholder="14-15. Automation and ____ ____ are set to change the workplace." required><input type="text" name="R_Q16" placeholder="16. Some predict widespread job ____." required><input type="text" name="R_Q17_18" placeholder="17-18. Human workers can focus on creativity and ____ ____." required><input type="text" name="R_Q19" placeholder="19. A major challenge will be managing the ____." required><input type="text" name="R_Q20" placeholder="20. This requires investment in ____ and retraining." required><input type="text" name="R_Q21" placeholder="21. ..." required><input type="text" name="R_Q22" placeholder="22. ..." required><input type="text" name="R_Q23" placeholder="23. ..." required><input type="text" name="R_Q24" placeholder="24. ..." required><input type="text" name="R_Q25" placeholder="25. ..." required><input type="text" name="R_Q26" placeholder="26. ..." required><input type="text" name="R_Q27" placeholder="27. ..." required></div><div class="question-block"><label>Questions 28-40</label><input type="text" name="R_Q28" placeholder="28. ..." required><input type="text" name="R_Q29" placeholder="29. ..." required><input type="text" name="R_Q30" placeholder="30. ..." required><input type="text" name="R_Q31" placeholder="31. ..." required><input type="text" name="R_Q32" placeholder="32. ..." required><input type="text" name="R_Q33" placeholder="33. ..." required><input type="text" name="R_Q34" placeholder="34. ..." required><input type="text" name="R_Q35" placeholder="35. ..." required><input type="text" name="R_Q36" placeholder="36. ..." required><input type="text" name="R_Q37" placeholder="37. ..." required><input type="text" name="R_Q38" placeholder="38. ..." required><input type="text" name="R_Q39" placeholder="39. ..." required><input type="text" name="R_Q40" placeholder="40. ..." required></div></div>
+            <button type="submit" class="btn btn-primary">Submit Test</button>
         </div>
-        <br><p>&copy;2025 by Thomas. All rights reserved.</p>
-    </div>
-</footer>
-
-<div id="modal-container" class="modal-container">
-    <div id="modal-content" class="modal-content">
-        <span class="close-btn">&times;</span>
-        <img src="" id="modal-image" alt="Project Preview">
-        <h3 id="modal-title"></h3>
-        <p id="modal-description"></p>
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
+    </form>
+    <form id="writing-test-interface" class="test-overlay" action="https://formspree.io/f/xanpkqvg" method="POST">
+        <div class="test-header"><div class="test-title">Writing Test</div><div id="writing-timer" class="timer">60:00</div></div><div class="test-body container"><input type="hidden" name="_next" value="https://your-github-username.github.io/your-repo-name/thankyou.html"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_subject" value="New IELTS Writing Test Submission!"><div class="test-question-section"><h3>Writing Tasks</h3><div class="question-block"><label for="w_q1"><strong>Task 1</strong>: The chart below shows the percentage of the population in four different European countries who owned a smartphone in 2015 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.</label><textarea id="w_q1" name="Writing_Task_1" required></textarea></div><div class="question-block"><label for="w_q2"><strong>Task 2</strong>: Some people believe that success in life comes from taking risks or chances. Others believe that success results from careful planning. In your opinion, what does success come from? Give reasons for your answer and include any relevant examples from your own knowledge or experience. Write at least 250 words.</label><textarea id="w_q2" name="Writing_Task_2" required></textarea></div></div><button type="submit" class="btn btn-primary">Submit Test</button></div>
+    </form>
+    <form id="listening-test-interface" class="test-overlay" action="https://formspree.io/f/xanpkqvg" method="POST">
+        <div class="test-header"><div class="test-title">Listening Test</div><div id="listening-timer" class="timer">40:00</div></div>
+        <div class="test-body container"><input type="hidden" name="_next" value="https://your-github-username.github.io/your-repo-name/thankyou.html"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_subject" value="New IELTS Listening Test Submission!"><div class="test-question-section"><h3>Listening Section</h3><p>Play the audio for each section and answer the questions. You will only hear each audio once in a real exam.</p>
+                <h4>Section 1: Questions 1-10</h4><audio controls style="width:100%;"><source src="#" type="audio/mpeg">Your browser does not support audio.</audio><div class="question-block"><input type="text" name="L_Q1" placeholder="1. ..." required><input type="text" name="L_Q2" placeholder="2. ..." required><input type="text" name="L_Q3" placeholder="3. ..." required><input type="text" name="L_Q4" placeholder="4. ..." required><input type="text" name="L_Q5" placeholder="5. ..." required><input type="text" name="L_Q6" placeholder="6. ..." required><input type="text" name="L_Q7" placeholder="7. ..." required><input type="text" name="L_Q8" placeholder="8. ..." required><input type="text" name="L_Q9" placeholder="9. ..." required><input type="text" name="L_Q10" placeholder="10. ..." required></div>
+                <h4>Section 2: Questions 11-20</h4><audio controls style="width:100%;"><source src="#" type="audio/mpeg">Your browser does not support audio.</audio><div class="question-block"><input type="text" name="L_Q11" placeholder="11. ..." required><input type="text" name="L_Q12" placeholder="12. ..." required><input type="text" name="L_Q13" placeholder="13. ..." required><input type="text" name="L_Q14" placeholder="14. ..." required><input type="text" name="L_Q15" placeholder="15. ..." required><input type="text" name="L_Q16" placeholder="16. ..." required><input type="text" name="L_Q17" placeholder="17. ..." required><input type="text" name="L_Q18" placeholder="18. ..." required><input type="text" name="L_Q19" placeholder="19. ..." required><input type="text" name="L_Q20" placeholder="20. ..." required></div>
+                <h4>Section 3: Questions 21-30</h4><audio controls style="width:100%;"><source src="#" type="audio/mpeg">Your browser does not support audio.</audio><div class="question-block"><input type="text" name="L_Q21" placeholder="21. ..." required><input type="text" name="L_Q22" placeholder="22. ..." required><input type="text" name="L_Q23" placeholder="23. ..." required><input type="text" name="L_Q24" placeholder="24. ..." required><input type="text" name="L_Q25" placeholder="25. ..." required><input type="text" name="L_Q26" placeholder="26. ..." required><input type="text" name="L_Q27" placeholder="27. ..." required><input type="text" name="L_Q28" placeholder="28. ..." required><input type="text" name="L_Q29" placeholder="29. ..." required><input type="text" name="L_Q30" placeholder="30. ..." required></div>
+                <h4>Section 4: Questions 31-40</h4><audio controls style="width:100%;"><source src="#" type="audio/mpeg">Your browser does not support audio.</audio><div class="question-block"><input type="text" name="L_Q31" placeholder="31. ..." required><input type="text" name="L_Q32" placeholder="32. ..." required><input type="text" name="L_Q33" placeholder="33. ..." required><input type="text" name="L_Q34" placeholder="34. ..." required><input type="text" name="L_Q35" placeholder="35. ..." required><input type="text" name="L_Q36" placeholder="36. ..." required><input type="text" name="L_Q37" placeholder="37. ..." required><input type="text" name="L_Q38" placeholder="38. ..." required><input type="text" name="L_Q39" placeholder="39. ..." required><input type="text" name="L_Q40" placeholder="40. ..." required></div>
+            </div><button type="submit" class="btn btn-primary">Submit Test</button>
+        </div>
+    </form>
+    <form id="speaking-test-interface" class="test-overlay" action="https://formspree.io/f/xanpkqvg" method="POST">
+        <div class="test-header"><div class="test-title">Book Speaking Test</div></div><div class="test-body container"><input type="hidden" name="_next" value="https://your-github-username.github.io/your-repo-name/thankyou.html"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_subject" value="New Speaking Test Appointment Booking!"><div class="test-question-section"><h3>Book Your Live Speaking Test</h3><p>Please select your preferred date and time for a live online speaking test. Our review team will contact you via email to confirm your appointment.</p><div class="question-block"><label for="s_name">Your Name</label><input type="text" id="s_name" name="Applicant_Name" placeholder="Enter your full name" required></div><div class="question-block"><label for="s_email">Your Email</label><input type="email" id="s_email" name="Applicant_Email" placeholder="Enter your email address" required></div><div class="question-block"><label for="s_date">Preferred Date</label><input type="date" id="s_date" name="Preferred_Date" required></div><div class="question-block"><label for="s_time">Preferred Time</label><input type="time" id="s_time" name="Preferred_Time" required></div></div><button type="submit" class="btn btn-primary">Request Appointment</button></div>
+    </form>
     
+    <header>
+        <div class="container"><div id="site-title">IELTS Mastery Hub</div><nav><ul><li><a href="#hero">Home</a></li><li><a href="#intro">About</a></li><li><a href="#modules">Modules</a></li><li><a href="#mock-test">Mock Tests</a></li></ul></nav></div>
+    </header>
 
-const titleElement = document.getElementById('main-title');
-const titleText = "Thomas - Data Entry Specialist"; 
-let i = 0;
+    <main>
+        <section id="hero"><h1>Achieve Your Desired IELTS Score</h1><p>Your complete resource for IELTS preparation. Access structured guides and take timed mock tests to build your confidence and succeed.</p><a href="#mock-test" class="btn btn-primary">Practice Now</a></section>
+        <div class="container">
+            <section id="intro">
+                <h2>What is IELTS?</h2>
+                <div class="content-card">
+                    <p>The International English Language Testing System (IELTS) is the world's most popular high-stakes English language proficiency test for study, work, and migration. It assesses all of your English skills — reading, writing, listening, and speaking.</p>
+                    <h3>Key Benefits</h3>
+                    <ul><li><strong>Global Recognition:</strong> Accepted by over 11,000 organisations worldwide.</li><li><strong>Accurate Assessment:</strong> A reliable and fair measure of your ability to communicate in English.</li><li><strong>Unlocks Opportunities:</strong> A good IELTS score can unlock doors to higher education, global career prospects, and immigration.</li></ul>
+                </div>
+            </section>
+            <section id="modules">
+                <h2>The 4 Test Modules</h2>
+                <div class="content-card"><h3>Listening Test (30 minutes)</h3><p>Assess your ability to understand spoken English through four recorded sections, from everyday conversations to academic lectures.</p></div>
+                <div class="content-card"><h3>Reading Test (60 minutes)</h3><p>Test your comprehension of long, authentic texts from books, journals, and newspapers. The format differs for Academic and General Training.</p></div>
+                <div class="content-card"><h3>Writing Test (60 minutes)</h3><p>Complete two tasks: describing visual information (Task 1) and writing a formal essay on a given topic (Task 2).</p></div>
+                <div class="content-card"><h3>Speaking Test (11-14 minutes)</h3><p>A face-to-face interview with an examiner, covering general questions, a short talk on a specific topic, and a follow-up discussion.</p></div>
+            </section>
+            <section id="mock-test">
+                <h2>Practice Mock Tests</h2>
+                <div id="mock-test-grid">
+                    <div class="content-card"><h3>Reading Test</h3><p>Take a full 40-question, 60-minute reading test.</p><button class="btn btn-secondary start-test-btn" data-test="reading">Start Reading Test</button></div>
+                    <div class="content-card"><h3>Writing Test</h3><p>Hone your essay skills with two writing tasks in 60 minutes.</p><button class="btn btn-secondary start-test-btn" data-test="writing">Start Writing Test</button></div>
+                    <div class="content-card"><h3>Listening Test</h3><p>Take a full 40-question, 40-minute audio-based exam.</p><button class="btn btn-secondary start-test-btn" data-test="listening">Start Listening Test</button></div>
+                    <div class="content-card"><h3>Speaking Test</h3><p>Book a live, one-on-one speaking test with a reviewer.</p><button class="btn btn-secondary start-test-btn" data-test="speaking">Book Appointment</button></div>
+                </div>
+            </section>
+        </div>
+    </main>
 
-function typeTitleOnce() {
-    if (i < titleText.length) {
-        titleElement.textContent += titleText.charAt(i);
-        i++;
-        setTimeout(typeTitleOnce, 100); 
-    } else {
-        titleElement.style.borderRight = 'none';
-    }
-}
-typeTitleOnce(); 
+    <footer><div class="container"><p>&copy;2025 PrepareForYourIELTS. Developed by Sarnab Bhattacharjee.</p></div></footer>
 
-   
-    const typedTextSpan = document.getElementById("typed-text");
-    const textArray = ["Data Entry", "Data Cleansing", "Web Research", "CRM Management"];
-    let textArrayIndex = 0;
-    let charIndex = 0;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const termsModal = document.getElementById('terms-modal');
+            const agreeBtn = document.getElementById('agree-btn');
+            const disagreeBtn = document.getElementById('disagree-btn');
+            const startTestBtns = document.querySelectorAll('.start-test-btn');
+            const warningModal = document.getElementById('warning-modal');
+            const proceedTestBtn = document.getElementById('proceed-test-btn');
+            const cancelTestBtn = document.getElementById('cancel-test-btn');
+            const dqModal = document.getElementById('disqualified-modal');
+            const closeDqModal = document.getElementById('close-dq-modal');
 
-    function typeSubtitle() {
-        if (charIndex < textArray[textArrayIndex].length) {
-            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-            charIndex++;
-            setTimeout(typeSubtitle, 100);
-        } else {
-            setTimeout(eraseSubtitle, 2000);
-        }
-    }
+            let activeTest = null;
+            let activeTimer = null;
+            let countdown = null;
 
-    function eraseSubtitle() {
-        if (charIndex > 0) {
-            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
-            charIndex--;
-            setTimeout(eraseSubtitle, 50);
-        } else {
-            textArrayIndex++;
-            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-            setTimeout(typeSubtitle, 500);
-        }
-    }
-    typeSubtitle(); 
-    
+           
+            if (localStorage.getItem('termsAgreed') !== 'true') {
+                termsModal.classList.add('visible');
+            }
+            
+            agreeBtn.addEventListener('click', () => {
+                localStorage.setItem('termsAgreed', 'true');
+                termsModal.classList.remove('visible');
+                showNotification("Welcome to the IELTS Mastery Hub!", "success");
+            });
 
-   
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-            if (entry.target.tagName === 'H2' && entry.isIntersecting) entry.target.classList.add('visible');
+            disagreeBtn.addEventListener('click', () => {
+                termsModal.classList.remove('visible');
+                showNotification("Some features may not be accessible.", "info");
+            });
+
+            startTestBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    activeTest = btn.dataset.test;
+                    if (activeTest === 'speaking') {
+                        const speakingInterface = document.getElementById('speaking-test-interface');
+                        speakingInterface.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        warningModal.classList.add('visible');
+                    }
+                });
+            });
+
+            cancelTestBtn.addEventListener('click', () => warningModal.classList.remove('visible'));
+            closeDqModal.addEventListener('click', () => dqModal.classList.remove('visible'));
+
+            proceedTestBtn.addEventListener('click', () => {
+                warningModal.classList.remove('visible');
+                document.addEventListener('visibilitychange', handleVisibilityChange);
+                switch(activeTest) {
+                    case 'reading': startTimer(3600, 'reading'); break;
+                    case 'writing': startTimer(3600, 'writing'); break;
+                    case 'listening': startTimer(2400, 'listening'); break;
+                }
+            });
+
+            function startTimer(duration, testName) {
+                const testInterface = document.getElementById(`${testName}-test-interface`);
+                const timerDisplay = document.getElementById(`${testName}-timer`);
+                activeTimer = { interface: testInterface, timer: timerDisplay };
+                document.body.style.overflow = 'hidden';
+                testInterface.style.display = 'flex';
+                let timer = duration;
+                countdown = setInterval(() => {
+                    const minutes = Math.floor(timer / 60);
+                    const seconds = timer % 60;
+                    timerDisplay.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    if (--timer < 0) {
+                        clearInterval(countdown);
+                        testInterface.submit();
+                    }
+                }, 1000);
+            }
+            
+            function handleVisibilityChange() {
+                if (document.hidden && activeTimer) {
+                    disqualifyTest();
+                }
+            }
+
+            function disqualifyTest() {
+                clearInterval(countdown);
+                if (activeTimer) {
+                    activeTimer.interface.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+                dqModal.classList.add('visible');
+                activeTimer = null;
+                activeTest = null;
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
+            
+            function showNotification(message, type = 'info') {
+                const notification = document.getElementById('notification-popup');
+                notification.textContent = message;
+                notification.className = 'notification'; 
+                notification.classList.add(type); 
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 4000);
+            }
         });
-    }, { threshold: 0.1 });
-
-    const animatedElements = document.querySelectorAll('[data-animation], h2');
-    animatedElements.forEach(el => observer.observe(el));
-
-
- 
-    const metricBars = document.querySelectorAll('.metric-bar');
-    metricBars.forEach(bar => {
-        bar.addEventListener('mousemove', (e) => {
-            const rect = bar.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            bar.style.setProperty('--mouse-x', `${x}px`);
-            bar.style.setProperty('--mouse-y', `${y}px`);
-        });
-    });
-
-    const previewBtns = document.querySelectorAll('.preview-btn');
-    const modalContainer = document.getElementById('modal-container');
-    const closeBtn = document.querySelector('.close-btn');
-    const modalImage = document.getElementById('modal-image');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-
-    previewBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const card = this.closest('.card');
-            modalImage.src = card.getAttribute('data-image');
-            modalTitle.textContent = card.getAttribute('data-title');
-            modalDescription.textContent = card.getAttribute('data-description');
-            modalContainer.style.display = 'flex';
-            document.body.classList.add('modal-open');
-        });
-    });
-
-    function closeModal() {
-        modalContainer.style.display = 'none';
-        document.body.classList.remove('modal-open');
-    }
-
-    closeBtn.addEventListener('click', closeModal);
-    modalContainer.addEventListener('click', (event) => { if (event.target === modalContainer) closeModal(); });
-    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeModal(); });
-});
-</script>
+    </script>
 </body>
 </html>
