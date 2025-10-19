@@ -98,10 +98,17 @@
             text-align: center;
             margin-top: auto;
         }
+        .btn:disabled {
+            background-color: #555;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
         .btn-primary { background-color: var(--accent-color); color: #fff; box-shadow: 0 4px 15px rgba(0, 170, 255, .3); }
-        .btn-primary:hover { background-color: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 170, 255, .4); }
+        .btn-primary:hover:not(:disabled) { background-color: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 170, 255, .4); }
         .btn-secondary { background-color: transparent; color: var(--primary-text); border: 2px solid var(--border-color); }
-        .btn-secondary:hover { background-color: var(--border-color); border-color: var(--accent-color); }
+        .btn-secondary:hover:not(:disabled) { background-color: var(--border-color); border-color: var(--accent-color); }
         .test-overlay {
             position: fixed;
             top: 0;
@@ -218,12 +225,149 @@
         <div class="test-header"><div class="test-title">Reading Test</div><div id="reading-timer" class="timer">60:00</div></div>
         <div class="test-body container">
             <input type="hidden" name="_next" value="https://your-github-username.github.io/your-repo-name/#mock-test"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_subject" value="New IELTS Reading Test Submission!">
-            <div class="test-question-section"><h4>Reading Passage 1</h4><div class="test-passage"><p>The concept of 'emotional intelligence' (EI) was first popularized in 1995 by psychologist Daniel Goleman...</p></div><div class="question-block"><label>Questions 1-5</label><input type="text" name="R_Q1" placeholder="1. Who popularized the concept of EI?" required><input type="text" name="R_Q2" placeholder="2. In what year was EI popularized?" required><input type="text" name="R_Q3" placeholder="3. How many main components are in Goleman's model?" required><input type="text" name="R_Q4" placeholder="4. What component involves understanding others' feelings?" required><input type="text" name="R_Q5" placeholder="5. What ability involves controlling one's own emotions?" required></div></div>
-            <div class="test-question-section"><h4>Reading Passage 2</h4><div class="test-passage"><p>The Great Barrier Reef, off the coast of Queensland in Australia, is the largest living thing on Earth...</p></div><div class="question-block"><label>Questions 6-13</label><input type="text" name="R_Q6" placeholder="6. The Great Barrier Reef is 2,300km long. (T/F/NG)" required><input type="text" name="R_Q7" placeholder="7. The reef can be seen from the moon. (T/F/NG)" required><input type="text" name="R_Q8" placeholder="8. Pollution from tourism is the main threat. (T/F/NG)" required><input type="text" name="R_Q9" placeholder="9. The reef contains over 600 types of coral. (T/F/NG)" required><input type="text" name="R_Q10" placeholder="10. Conservation efforts have been largely successful. (T/F/NG)" required><input type="text" name="R_Q11" placeholder="11. The reef is home to sharks. (T/F/NG)" required><input type="text" name="R_Q12" placeholder="12. Agricultural runoff is a form of pollution. (T/F/NG)" required><input type="text" name="R_Q13" placeholder="13. The reef is located in Western Australia. (T/F/NG)" required></div></div>
-            <div class="test-question-section"><h4>Reading Passage 3</h4><div class="test-passage"><p>Automation and artificial intelligence (AI) are poised to transform the modern workplace...</p></div><div class="question-block"><label>Questions 14-27</label><input type="text" name="R_Q14_15" placeholder="14-15. Automation and ____ ____ are set to change the workplace." required><input type="text" name="R_Q16" placeholder="16. Some predict widespread job ____." required><input type="text" name="R_Q17_18" placeholder="17-18. Human workers can focus on creativity and ____ ____." required><input type="text" name="R_Q19" placeholder="19. A major challenge will be managing the ____." required><input type="text" name="R_Q20" placeholder="20. This requires investment in ____ and retraining." required><input type="text" name="R_Q21" placeholder="21. ..." required><input type="text" name="R_Q22" placeholder="22. ..." required><input type="text" name="R_Q23" placeholder="23. ..." required><input type="text" name="R_Q24" placeholder="24. ..." required><input type="text" name="R_Q25" placeholder="25. ..." required><input type="text" name="R_Q26" placeholder="26. ..." required><input type="text" name="R_Q27" placeholder="27. ..." required></div><div class="question-block"><label>Questions 28-40</label><input type="text" name="R_Q28" placeholder="28. ..." required><input type="text" name="R_Q29" placeholder="29. ..." required><input type="text" name="R_Q30" placeholder="30. ..." required><input type="text" name="R_Q31" placeholder="31. ..." required><input type="text" name="R_Q32" placeholder="32. ..." required><input type="text" name="R_Q33" placeholder="33. ..." required><input type="text" name="R_Q34" placeholder="34. ..." required><input type="text" name="R_Q35" placeholder="35. ..." required><input type="text" name="R_Q36" placeholder="36. ..." required><input type="text" name="R_Q37" placeholder="37. ..." required><input type="text" name="R_Q38" placeholder="38. ..." required><input type="text" name="R_Q39" placeholder="39. ..." required><input type="text" name="R_Q40" placeholder="40. ..." required></div></div>
+            
+            <div class="test-question-section">
+                <h4>Reading Passage 1</h4>
+                <div class="test-passage">
+                    <p><strong>The History of Glass</strong></p>
+                    <p>A. Glass, a material both beautiful and functional, has a history that stretches back thousands of years. The earliest evidence of glassmaking dates to around 3600 BCE in Mesopotamia. However, it wasn't until about 1500 BCE in Egypt that glass production became more sophisticated, with small vessels for perfumes and oils being created. These early objects were luxury items, available only to royalty and the extremely wealthy, due to the difficult and secretive nature of their production.</p>
+                    <p>B. The Roman Empire was instrumental in revolutionizing glass production. Around the 1st century CE, Roman artisans discovered the technique of glassblowing. This innovation dramatically changed the industry, allowing for the mass production of glass vessels in various shapes and sizes. Glass was no longer an exclusive luxury; it became a common material for everyday items such as bowls, bottles, and even windowpanes, a Roman invention that brought light into buildings in an unprecedented way.</p>
+                    <p>C. Following the fall of the Roman Empire, the art of glassmaking was largely preserved and advanced in the Islamic world. Islamic artisans became masters of decorative techniques, creating intricate stained glass and lusterware, where metallic pigments were applied to the glass surface. Venice, with its close trade links to the Middle East, emerged as a major glassmaking center in Europe by the 13th century. The Venetian island of Murano became synonymous with high-quality, artistic glass, a reputation it maintains to this day. The secrets of Venetian glassmaking were so closely guarded that craftsmen were forbidden from leaving the island under penalty of death.</p>
+                    <p>D. The next significant leap in glass technology occurred in England during the 17th century. In 1674, George Ravenscroft patented a new formula for lead crystal glass. By adding lead oxide to the molten glass, he created a material that was heavier, more brilliant, and softer, making it easier to cut and engrave. This development laid the foundation for the English crystal industry and set new standards for tableware and decorative items throughout Europe.</p>
+                    <p>E. The Industrial Revolution in the 19th and 20th centuries fully mechanized the glass production process. The invention of machines like the bottle-making machine by Michael Owens in 1903 and the development of the float glass process by Sir Alastair Pilkington in the 1950s made mass production cheaper and more efficient than ever before. The float process, which involves floating molten glass on a bed of molten tin, is still the primary method used to produce high-quality flat glass for windows and architectural purposes today.</p>
+                </div>
+                <div class="question-block">
+                    <label><strong>Questions 1-5</strong><br>The reading passage has five paragraphs, A-E. Choose the correct heading for each paragraph from the list of headings below.</label>
+                    <p><em>i. Industrial mechanization of glass production<br>ii. The guarded secrets of an island's craft<br>iii. Early, exclusive uses of glass<br>iv. The birth of the crystal industry<br>v. A revolutionary production technique spreads</em></p>
+                    <input type="text" name="R_Q1" placeholder="1. Paragraph A" required>
+                    <input type="text" name="R_Q2" placeholder="2. Paragraph B" required>
+                    <input type="text" name="R_Q3" placeholder="3. Paragraph C" required>
+                    <input type="text" name="R_Q4" placeholder="4. Paragraph D" required>
+                    <input type="text" name="R_Q5" placeholder="5. Paragraph E" required>
+                </div>
+                <div class="question-block">
+                    <label><strong>Questions 6-9</strong><br>Do the following statements agree with the information given in the reading passage? Write:<br><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</label>
+                    <input type="text" name="R_Q6" placeholder="6. Glassblowing made glass items more accessible to the general public." required>
+                    <input type="text" name="R_Q7" placeholder="7. Islamic artisans invented the technique of glassblowing." required>
+                    <input type="text" name="R_Q8" placeholder="8. George Ravenscroft was the first person to add lead to glass." required>
+                    <input type="text" name="R_Q9" placeholder="9. The float glass process is no longer used today." required>
+                </div>
+                <div class="question-block">
+                    <label><strong>Questions 10-13</strong><br>Complete the sentences below. Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</label>
+                    <input type="text" name="R_Q10" placeholder="10. Early Egyptian glass products were considered ..." required>
+                    <input type="text" name="R_Q11" placeholder="11. The use of glass for ... was a Roman innovation." required>
+                    <input type="text" name="R_Q12" placeholder="12. The city of Venice had strong ... with the Middle East." required>
+                    <input type="text" name="R_Q13" placeholder="13. Michael Owens' invention automated the creation of ..." required>
+                </div>
+            </div>
+
+            <div class="test-question-section">
+                <h4>Reading Passage 2</h4>
+                <div class="test-passage">
+                    <p><strong>The Urban Fox: A Success Story</strong></p>
+                    <p>A. The red fox (Vulpes vulpes) is one of the most adaptable and successful mammals on the planet, thriving in environments ranging from Arctic tundra to arid deserts. Perhaps most surprisingly, it has also become a master of urban living. Once a creature of the countryside, the fox's expansion into cities, particularly in the UK and Australia, is a fascinating story of animal adaptation in the face of human encroachment.</p>
+                    <p>B. The primary driver for the fox's urban migration was the changing landscape of our cities. Post-war suburban expansion in the mid-20th century created a perfect habitat: a mosaic of gardens, parks, railway lines, and industrial estates that mimicked the fox's natural territory of woodland edges and fields. These areas provided not only shelter and denning sites but also a plentiful and diverse food supply. Urban foxes are opportunistic omnivores, with a diet far more varied than their rural cousins. They feast on discarded food from bins, pet food left in gardens, and a rich supply of natural prey like pigeons, rats, and invertebrates.</p>
+                    <p>C. One of the key behavioral adaptations of urban foxes is their altered relationship with humans. While rural foxes are notoriously shy and elusive, their city-dwelling counterparts often display remarkable boldness. They have learned that humans are generally not a threat and are, in fact, an indirect source of food. This has led to a reduction in their flight distance—the distance at which an animal will flee from an approaching threat. Many urban residents report foxes casually trotting down their street in broad daylight or even entering homes through cat flaps.</p>
+                    <p>D. Social structures have also been modified by the urban environment. The abundance and concentration of food resources mean that urban fox territories are significantly smaller than those in the countryside. A single rural territory might cover several square kilometers, whereas a city territory could be as small as a few dozen gardens. This proximity allows for more complex social interactions. While foxes are not pack animals like wolves, urban groups can be larger and more tolerant of one another, often consisting of a dominant pair and several subordinate relatives who help raise the cubs.</p>
+                    <p>E. Despite their success, the presence of urban foxes is not without controversy. Concerns range from noise disturbance caused by their nocturnal screams and digging in gardens, to the perceived threat to pets and the potential for disease transmission. However, scientific studies have largely debunked the most alarmist claims. Attacks on pets are rare, with foxes preferring smaller, easier prey. Furthermore, while foxes can carry diseases like mange and roundworm, the risk of transmission to humans is extremely low. Most conflicts arise from a misunderstanding of fox behavior, and many can be mitigated through simple measures like securing rubbish bins and not deliberately feeding the animals.</p>
+                </div>
+                <div class="question-block">
+                    <label><strong>Questions 14-18</strong><br>Which paragraph contains the following information?</label>
+                    <input type="text" name="R_Q14" placeholder="14. A comparison of the geographical area foxes occupy in different locations." required>
+                    <input type="text" name="R_Q15" placeholder="15. An explanation of why cities became a suitable environment for foxes." required>
+                    <input type="text" name="R_Q16" placeholder="16. A description of the varied diet of city-dwelling foxes." required>
+                    <input type="text" name="R_Q17" placeholder="17. The reasons behind public concern about foxes and a scientific perspective on them." required>
+                    <input type="text" name="R_Q18" placeholder="18. A change in fox behavior regarding their proximity to people." required>
+                </div>
+                <div class="question-block">
+                    <label><strong>Questions 19-22</strong><br>Complete the summary below. Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</label>
+                    <p>The success of the urban fox is a clear example of <strong>19.</strong> ____. The growth of suburbs after the war provided an ideal <strong>20.</strong> ____, which offered both food and places for shelter. A key difference between urban and rural foxes is the urban fox's reduced <strong>21.</strong> ____, making it appear much bolder around people. Their territories in cities are much smaller, which can lead to more <strong>22.</strong> ____ social structures.</p>
+                    <input type="text" name="R_Q19" placeholder="19. ..." required>
+                    <input type="text" name="R_Q20" placeholder="20. ..." required>
+                    <input type="text" name="R_Q21" placeholder="21. ..." required>
+                    <input type="text" name="R_Q22" placeholder="22. ..." required>
+                </div>
+                <div class="question-block">
+                    <label><strong>Questions 23-26</strong><br>Choose the correct letter, A, B, C, or D.</label>
+                    <p><strong>23. What does the passage say about the diet of urban foxes?</strong></p>
+                    <p>A. It is identical to the diet of rural foxes.<br>B. It consists mainly of pet food.<br>C. It is broader and more diverse than that of their rural counterparts.<br>D. It primarily consists of small mammals like rats.</p>
+                    <input type="text" name="R_Q23" placeholder="23. Answer (A, B, C, or D)" required>
+
+                    <p><strong>24. According to paragraph C, urban foxes have learned that humans are</strong></p>
+                    <p>A. a direct source of danger.<br>B. a species to be avoided at all costs.<br>C. a reliable provider of food.<br>D. generally not a direct danger.</p>
+                    <input type="text" name="R_Q24" placeholder="24. Answer (A, B, C, or D)" required>
+
+                    <p><strong>25. What does the author suggest about the conflicts between humans and foxes?</strong></p>
+                    <p>A. They are an unavoidable consequence of urban living.<br>B. They are often based on a lack of understanding.<br>C. They prove that foxes are a significant danger to public health.<br>D. They can only be solved by removing the fox population.</p>
+                    <input type="text" name="R_Q25" placeholder="25. Answer (A, B, C, or D)" required>
+                    
+                    <p><strong>26. The main purpose of the text is to</strong></p>
+                    <p>A. warn people about the dangers of urban foxes.<br>B. explain how and why foxes have adapted to city life.<br>C. advocate for the removal of foxes from urban areas.<br>D. compare the social behavior of foxes and wolves.</p>
+                    <input type="text" name="R_Q26" placeholder="26. Answer (A, B, C, or D)" required>
+                </div>
+            </div>
+
+            <div class="test-question-section">
+                <h4>Reading Passage 3</h4>
+                <div class="test-passage">
+                    <p><strong>Biomimicry: Innovation Inspired by Nature</strong></p>
+                    <p>For centuries, inventors and artists have looked to the natural world for inspiration. However, a more formal discipline, known as biomimicry, has emerged in recent decades. Coined by scientist and author Janine Benyus, biomimicry is the practice of learning from and then emulating nature's forms, processes, and ecosystems to create more sustainable human technologies and solve complex problems. It is not simply about copying nature's look, but about understanding the principles that allow it to thrive.</p>
+                    <p>One of the most famous examples of biomimicry is the invention of Velcro. In 1941, Swiss engineer George de Mestral was walking his dog and noticed how burrs from a burdock plant clung tenaciously to his clothes and his dog's fur. Upon examining the burrs under a microscope, he saw they were covered in hundreds of tiny hooks that caught on loops in the fabric. This "hook and loop" mechanism inspired his invention, which is now used globally in everything from clothing to spacecraft.</p>
+                    <p>Another striking example comes from the world of architecture. Architect Mick Pearce, when designing the Eastgate Centre in Harare, Zimbabwe, needed a way to cool the large building without a conventional, energy-guzzling air-conditioning system. He found his model in the self-cooling mounds of African termites. These insects maintain a nearly constant temperature inside their mounds by creating a complex system of vents. Hot air is pushed out of the top, while cool air is drawn in from below. Pearce applied this principle of passive ventilation to the Eastgate Centre, which uses only 10% of the energy of a similar-sized conventional building, saving its owners millions of dollars in energy costs.</p>
+                    <p>Biomimicry is also transforming material science. Researchers at the University of Exeter were inspired by the iridescent wings of the Morpho butterfly, which are not colored with pigment but with microscopic structures that reflect light in a specific way. They developed a technology called "structured reflection" that can create vivid, non-fading colors for use in cosmetics, textiles, and security markings without using dyes or pigments, which are often toxic and polluting. Similarly, the lotus flower's ability to stay clean in muddy water, due to the water-repellent microstructure of its leaves, has led to the development of self-cleaning paints, fabrics, and glass.</p>
+                    <p>The potential applications of biomimicry are vast and largely untapped. By studying how nature sequesters carbon, purifies water, and runs on solar energy, we can create industries that are not just efficient but regenerative—actively contributing to the health of the planet. The core message of Janine Benyus and other proponents is that nature, after 3.8 billion years of research and development, has already solved many of the challenges we face. The key is to shift our perspective from viewing nature as a resource to be exploited to seeing it as a mentor to be respected and learned from. This paradigm shift could be fundamental to creating a truly sustainable future.</p>
+                </div>
+                <div class="question-block">
+                    <label><strong>Questions 27-31</strong><br>Do the following statements agree with the claims of the writer in the reading passage? Write:<br><strong>YES</strong> if the statement agrees with the claims of the writer<br><strong>NO</strong> if the statement contradicts the claims of the writer<br><strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this</label>
+                    <input type="text" name="R_Q27" placeholder="27. Biomimicry as a formal field of study is a very old concept." required>
+                    <input type="text" name="R_Q28" placeholder="28. George de Mestral invented Velcro by accident." required>
+                    <input type="text" name="R_Q29" placeholder="29. The Eastgate Centre's cooling system is less effective than conventional air-conditioning." required>
+                    <input type="text" name="R_Q30" placeholder="30. The color of a Morpho butterfly's wings comes from chemical pigments." required>
+                    <input type="text" name="R_Q31" placeholder="31. The author believes biomimicry is essential for future sustainability." required>
+                </div>
+                <div class="question-block">
+                    <label><strong>Questions 32-36</strong><br>Complete the table below. Choose <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> from the passage for each answer.</label>
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr style="background-color: var(--secondary-bg);">
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Natural Model</th>
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Principle</th>
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Human Innovation</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Burdock plant burrs</td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);"><input type="text" name="R_Q32" placeholder="32. ..." required style="margin:0;"></td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Velcro</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);"><input type="text" name="R_Q33" placeholder="33. ..." required style="margin:0;"></td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Passive ventilation</td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Eastgate Centre</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Morpho butterfly wings</td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Structured reflection</td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);"><input type="text" name="R_Q34" placeholder="34. ..." required style="margin:0;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Lotus flower leaves</td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);"><input type="text" name="R_Q35" placeholder="35. ..." required style="margin:0;"></td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);"><input type="text" name="R_Q36" placeholder="36. ..." required style="margin:0;"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="question-block">
+                    <label><strong>Questions 37-40</strong><br>Answer the questions below. Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</label>
+                    <input type="text" name="R_Q37" placeholder="37. Who is credited with coining the term 'biomimicry'?" required>
+                    <input type="text" name="R_Q38" placeholder="38. What did Mick Pearce want to avoid installing in the Eastgate Centre?" required>
+                    <input type="text" name="R_Q39" placeholder="39. What kind of future can biomimicry help create, according to the author?" required>
+                    <input type="text" name="R_Q40" placeholder="40. According to the author, what should we view nature as?" required>
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit Test</button>
         </div>
     </form>
+
     <form id="writing-test-interface" class="test-overlay" action="https://formspree.io/f/xanpkqvg" method="POST">
         <div class="test-header"><div class="test-title">Writing Test</div><div id="writing-timer" class="timer">60:00</div></div><div class="test-body container"><input type="hidden" name="_next" value="https://your-github-username.github.io/your-repo-name/#mock-test"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_subject" value="New IELTS Writing Test Submission!"><div class="test-question-section"><h3>Writing Tasks</h3><div class="question-block"><label for="w_q1"><strong>Task 1</strong>: The chart below shows the percentage of the population in four different European countries who owned a smartphone in 2015 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.</label><textarea id="w_q1" name="Writing_Task_1" required></textarea></div><div class="question-block"><label for="w_q2"><strong>Task 2</strong>: Some people believe that success in life comes from taking risks or chances. Others believe that success results from careful planning. In your opinion, what does success come from? Give reasons for your answer and include any relevant examples from your own knowledge or experience. Write at least 250 words.</label><textarea id="w_q2" name="Writing_Task_2" required></textarea></div></div><button type="submit" class="btn btn-primary">Submit Test</button></div>
     </form>
@@ -293,8 +437,8 @@
             let activeTest = null;
             let activeTimer = null;
             let countdown = null;
+            const lockoutTimers = {};
 
-           
             if (localStorage.getItem('termsAgreed') !== 'true') {
                 termsModal.classList.add('visible');
             }
@@ -309,8 +453,6 @@
                 termsModal.classList.remove('visible');
                 showNotification("Some features may not be accessible.", "info");
             });
-
-           
             startTestBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     activeTest = btn.dataset.test;
@@ -337,16 +479,54 @@
                 }
             });
 
-       
             testForms.forEach(form => {
                 form.addEventListener('submit', () => {
                     clearInterval(countdown);
                     document.removeEventListener('visibilitychange', handleVisibilityChange);
+                    const testType = form.id.replace('-test-interface', '');
+                    const lockoutDuration = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+                    const lockoutEndTime = Date.now() + lockoutDuration;
+                    localStorage.setItem(`${testType}_lockout_end`, lockoutEndTime);
+
                     activeTimer = null;
                     countdown = null;
                     document.body.style.overflow = 'auto';
                 });
             });
+            
+            function checkTestLocks() {
+                startTestBtns.forEach(btn => {
+                    const testType = btn.dataset.test;
+                    const lockoutEndTime = localStorage.getItem(`${testType}_lockout_end`);
+
+                    if (lockoutEndTime && Date.now() < lockoutEndTime) {
+                        btn.disabled = true;                       
+                        if (lockoutTimers[testType]) {
+                            clearInterval(lockoutTimers[testType]);
+                        }
+
+                        lockoutTimers[testType] = setInterval(() => {
+                            const remaining = lockoutEndTime - Date.now();
+                            if (remaining <= 0) {
+                                clearInterval(lockoutTimers[testType]);
+                                btn.disabled = false;
+                                btn.textContent = btn.dataset.originalText || `Start ${testType.charAt(0).toUpperCase() + testType.slice(1)} Test`;
+                                localStorage.removeItem(`${testType}_lockout_end`);
+                            } else {
+                                const hours = Math.floor(remaining / (1000 * 60 * 60));
+                                const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+                                const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+                                btn.textContent = `Locked (${hours}h ${minutes}m ${seconds}s)`;
+                            }
+                        }, 1000);
+                    } else {
+             
+                        if (!btn.dataset.originalText) {
+                           btn.dataset.originalText = btn.textContent;
+                        }
+                    }
+                });
+            }
 
             function startTimer(duration, testName) {
                 const testInterface = document.getElementById(`${testName}-test-interface`);
@@ -361,7 +541,7 @@
                     timerDisplay.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
                     if (--timer < 0) {
                         clearInterval(countdown);
-                        testInterface.submit();
+                        testInterface.querySelector('form').submit();
                     }
                 }, 1000);
             }
@@ -395,6 +575,8 @@
                     notification.classList.remove('show');
                 }, 4000);
             }
+
+            checkTestLocks();
         });
     </script>
 </body>
